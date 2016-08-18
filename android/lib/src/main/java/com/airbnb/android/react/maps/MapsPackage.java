@@ -1,6 +1,7 @@
 package com.airbnb.android.react.maps;
 
 import android.app.Activity;
+import android.app.Application;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
@@ -13,14 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class MapsPackage implements ReactPackage {
-    private Activity reactActivity;
-    public MapsPackage(Activity activity) {
-        this.reactActivity = activity;
-    } // backwards compatability
-    public MapsPackage() { }
-
-    public void setActivity(Activity reactActivity) {
-        this.reactActivity = reactActivity;
+    public MapsPackage() {
     }
 
     @Override
@@ -40,7 +34,7 @@ public class MapsPackage implements ReactPackage {
         AirMapPolylineManager polylineManager = new AirMapPolylineManager(reactContext);
         AirMapPolygonManager polygonManager = new AirMapPolygonManager(reactContext);
         AirMapCircleManager circleManager = new AirMapCircleManager(reactContext);
-        AirMapManager mapManager = new AirMapManager(this.reactActivity);
+        AirMapManager mapManager = new AirMapManager();
 
         return Arrays.<ViewManager>asList(
                 calloutManager,
